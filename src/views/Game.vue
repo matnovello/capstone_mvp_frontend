@@ -32,6 +32,7 @@ export default {
     moveForward: function () {
       axios.patch(`http://localhost:3000/api/games/${localStorage.getItem("gameId")}`).then((response) => {
         this.gameId = response.data.gameId;
+        console.log(response.data.current_room);
       });
     },
   },
