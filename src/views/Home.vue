@@ -6,7 +6,8 @@
     
     
     <input type = text v-model="userName" placeholder="enter username">
-    <button v-on:click="getInfo">click and check console</button> 
+    <button v-on:click="newGame">start new game</button> 
+    {{ message }}
   </div>
 </template>
 
@@ -21,16 +22,21 @@ export default {
     return {
       message: "Welcome to Vue.js!",
       userName: "",
+      message: "",
     };
   },
   created: function () {},
   methods: {
-    getInfo: function () {
+    newGame: function () {
       var params = {
         user_name: this.userName,
       };
       axios.post("http://localhost:3000/api/games", params).then((response) => {
         console.log(response.data);
+        localStorage.setItem("gameId", response.data.game_id);
+        this.$router.push("/game");
+
+        console.log(localStorage.getItem("gameId"));
       });
     },
   },
