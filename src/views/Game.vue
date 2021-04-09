@@ -3,7 +3,8 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    {{ gameId }}
+    {{ test }}
+    <button v-on:click="moveForward">Move Forward</button>
     
   </div>
 </template>
@@ -19,17 +20,21 @@ export default {
     return {
       message: "You are in the woods",
       gameId: localStorage.getItem("gameId"),
+      test: "",
     };
   },
   created: function () {
-    // var params = {
-    //   gameId,
-    // };
-    // axios.get("http://localhost:3000/api/games/" + gameId).then((response) => {
-    //   console.log(response.data);
-    // });
+    axios.get(`http://localhost:3000/api/games/${this.gameId}`).then((response) => {
+      console.log(response.data);
+    });
   },
-  methods: {},
+  methods: {
+    moveForward: function () {
+      axios.patch(`http://localhost:3000/api/games/${localStorage.getItem("gameId")}`).then((response) => {
+        this.gameId = response.data.gameId;
+      });
+    },
+  },
 };
 </script>
 
