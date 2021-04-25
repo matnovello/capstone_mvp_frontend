@@ -4,10 +4,10 @@
   <div class="home">
     <h1>{{ message }} {{ user }} </h1>
     <p> You are in room {{ room.current_room }} </p>
-
-    <button v-on:click="moveForward">Move Forward</button>
+ <!-- if monster is in room hide... then, if monster is attacked , show -->
+    <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
     <p v-if="room.has_monster === true "> 
-      oh no , a {{ monster.name }}
+      oh no , a {{ monster.name }} .. id is {{ monster.id }}
       <br>
       <img alt="Vue logo" src="../assets/skeleton_creep.gif">
     </br>
@@ -18,8 +18,6 @@
     <p v-if="attacked === true "> </p>
     <p v-else-if="run === true"> </p>
       {{ gameMessage }}
-
-    
   </div>
 </template>
 
@@ -40,6 +38,7 @@ export default {
       room: "",
       gameMessage: "",
       attacked: false,
+      toggleMoveForward: true,
       run: false,
     };
   },
@@ -62,6 +61,10 @@ export default {
         this.attacked = false;
         this.run = false;
         this.gameMessage = "";
+
+        if (response.data.room.has_monster === true) {
+          this.toggleMoveForward = !this.toggleMoveForward;
+        }
       });
     },
     userRun: function () {
@@ -70,7 +73,12 @@ export default {
     },
     userAttack: function () {
       // axios request that the user is attacking to back-end
-      (this.attacked = true), (this.gameMessage = `you vanquish the ${this.monster.name}`);
+      axios.patch(`http://localhost:3000/api/monsters/${this.monster.id}`).then((response) => {
+        console.log(response.data.monster.is_dead);
+      }),
+        (this.attacked = true),
+        (this.gameMessage = `you vanquish the ${this.monster.name}`);
+      this.toggleMoveForward = !this.toggleMoveForward;
     },
   },
 };
