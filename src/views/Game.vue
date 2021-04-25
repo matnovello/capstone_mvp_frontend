@@ -17,6 +17,7 @@
     <p v-else-if="room.has_monster === false"> No monsters here....</p>
     <p v-if="attacked === true "> </p>
     <p v-else-if="run === true"> </p>
+    <!--  dynamic game message based off user attack/escape -->
       {{ gameMessage }}
   </div>
 </template>
@@ -87,7 +88,8 @@ export default {
         console.log(response.data);
         if (response.data.has_escaped === true) {
           this.toggleMoveForward = !this.toggleMoveForward;
-          console.log("it works");
+          this.gameMessage = `you have escaped!`;
+          this.room.has_monster = false;
         }
       });
     },
