@@ -40,6 +40,7 @@ export default {
       attacked: false,
       toggleMoveForward: true,
       run: false,
+      hasEscaped: "",
     };
   },
   created: function () {
@@ -75,10 +76,20 @@ export default {
       // axios request that the user is attacking to back-end
       axios.patch(`http://localhost:3000/api/monsters/${this.monster.id}`).then((response) => {
         console.log(response.data.monster.is_dead);
+        console.log(response.data);
       }),
         (this.attacked = true),
         (this.gameMessage = `you vanquish the ${this.monster.name}`);
       this.toggleMoveForward = !this.toggleMoveForward;
+    },
+    userRun: function () {
+      axios.get(`http://localhost:3000/api/rooms/${this.room.current_room}`).then((response) => {
+        console.log(response.data);
+        if (response.data.has_escaped === true) {
+          this.toggleMoveForward = !this.toggleMoveForward;
+          console.log("it works");
+        }
+      });
     },
   },
 };
