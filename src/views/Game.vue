@@ -8,6 +8,8 @@
     <button v-on:click="moveForward">Move Forward</button>
     <p v-if="room.has_monster === true "> 
       oh no , a {{ monster.name }}
+      <br>
+      <img alt="Vue logo" src="../assets/skeleton_creep.gif">
     </br>
       <button v-on:click="userAttack">Attack</button>
       <button v-on:click="userRun">Run</button><br>
