@@ -6,17 +6,17 @@
     <p> You are in room {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
     <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
+    <div>
+    {{ lootMessage }}
+    </div>
     <p v-if="room.has_monster === true "> 
-      oh no , a {{ monster.name }} .. id is {{ monster.id }}
-      <br>
+      oh no , a {{ monster.name }} .. id is {{ monster.id }}<br>
       <img alt="Vue logo" src="../assets/skeleton_creep.gif">
     </br>
       <button v-on:click="userAttack">Attack</button>
       <button v-on:click="userRun">Run</button><br>
     </p>
-    <p v-if="room.has_loot === true">
-      This Room Contains loot!
-      </p>
+ 
     <p v-else-if="room.has_monster === false"> No monsters here....</p>
     <p v-if="attacked === true "> </p>
     <p v-else-if="run === true"> </p>
@@ -45,6 +45,7 @@ export default {
       toggleMoveForward: true,
       run: false,
       hasEscaped: "",
+      lootMessage: "",
     };
   },
   created: function () {
@@ -69,6 +70,11 @@ export default {
 
         if (response.data.room.has_monster === true) {
           this.toggleMoveForward = !this.toggleMoveForward;
+        }
+        if (response.data.room.has_loot === true) {
+          this.lootMessage = "This room contains Loot";
+        } else {
+          this.lootMessage = "No loot here";
         }
       });
     },
