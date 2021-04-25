@@ -14,6 +14,9 @@
       <button v-on:click="userAttack">Attack</button>
       <button v-on:click="userRun">Run</button><br>
     </p>
+    <p v-if="room.has_loot === true">
+      This Room Contains loot!
+      </p>
     <p v-else-if="room.has_monster === false"> No monsters here....</p>
     <p v-if="attacked === true "> </p>
     <p v-else-if="run === true"> </p>
@@ -81,14 +84,17 @@ export default {
       }),
         (this.attacked = true),
         (this.gameMessage = `you vanquish the ${this.monster.name}`);
+      // toggle moveForward button
       this.toggleMoveForward = !this.toggleMoveForward;
     },
     userRun: function () {
       axios.get(`http://localhost:3000/api/rooms/${this.room.current_room}`).then((response) => {
         console.log(response.data);
         if (response.data.has_escaped === true) {
+          // toggle moveForward button
           this.toggleMoveForward = !this.toggleMoveForward;
           this.gameMessage = `you have escaped!`;
+          //  when user escapes , hide the monster
           this.room.has_monster = false;
         }
       });
