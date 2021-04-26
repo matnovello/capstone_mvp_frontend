@@ -10,8 +10,11 @@
     {{ lootMessage }}
     </div>
     <p v-if="room.has_monster === true "> 
-      oh no , a {{ monster.name }} .. id is {{ monster.id }}<br>
+      oh no , a {{ monster.name }}<br>
       <img alt="Vue logo" src="../assets/skeleton_creep.gif">
+      <br>
+       {{ monster.catch_phrase}}
+       <br> 
     </br>
       <button v-on:click="userAttack">Attack</button>
       <button v-on:click="userRun">Run</button><br>
@@ -46,6 +49,7 @@ export default {
       run: false,
       hasEscaped: "",
       lootMessage: "",
+      catchPhrase: "",
     };
   },
   created: function () {
