@@ -3,15 +3,15 @@
 <template>
   <div class="home">
     <h1>{{ message }} {{ user }} </h1>
-    <p> You are in room {{ room.current_room }} </p>
+    <p> {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
     <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
     <div>
     {{ lootMessage }}
     </div>
     <p v-if="room.has_monster === true "> 
-      oh no , a {{ monster.name }}<br>
-      <img alt="Vue logo" src="../assets/skeleton_creep.gif">
+      You have encountered {{ monster.name }}<br>
+      <img alt="Vue logo" src="../assets/skeleton_creep.gif" style="height:85px;">
       <br>
        {{ monster.catch_phrase}}
        <br> 
@@ -21,7 +21,7 @@
     </p>
  
     <p v-else-if="room.has_monster === false"> No monsters here....</p>
-    <p v-if="attacked === true "> </p>
+    <!-- <p v-if="attacked === true "> </p> -->
     <p v-else-if="run === true"> </p>
     <!--  dynamic game message based off user attack/escape -->
       {{ gameMessage }}
@@ -37,7 +37,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "Welcome to the game, ",
+      message: "You awaken out of a deep slumber, ",
       gameId: localStorage.getItem("gameId"),
       test: "",
       user: "",
@@ -91,11 +91,14 @@ export default {
       axios.patch(`http://localhost:3000/api/monsters/${this.monster.id}`).then((response) => {
         console.log(response.data.monster.is_dead);
         console.log(response.data);
+        this.gameMessage = `you dealt ${response.data.attack_damage} damage`;
+        if (response.data.monster.is_dead === true) {
+          this.toggleMoveForward = !this.toggleMoveForward;
+          this.gameMessage = `you vanquish the ${this.monster.name}`;
+        }
       }),
-        (this.attacked = true),
-        (this.gameMessage = `you vanquish the ${this.monster.name}`);
+        (this.attacked = true);
       // toggle moveForward button
-      this.toggleMoveForward = !this.toggleMoveForward;
     },
     userRun: function () {
       axios.get(`http://localhost:3000/api/rooms/${this.room.current_room}`).then((response) => {
