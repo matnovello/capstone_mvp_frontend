@@ -2,7 +2,7 @@
 
 <template>
   <div class="home">
-    <h1>{{ message }} {{ user }} </h1>
+    <h1>{{ message }} {{ user.name }} </h1>
     <p> {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
     <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
@@ -25,6 +25,11 @@
     <p v-else-if="run === true"> </p>
     <!--  dynamic game message based off user attack/escape -->
       {{ gameMessage }}
+      <div id="userStats" v-for = "stat in user">
+        
+        <p>{{ stat }}</p>
+       
+      </div>
   </div>
 </template>
 
@@ -55,7 +60,7 @@ export default {
   created: function () {
     axios.get(`http://localhost:3000/api/games/${this.gameId}`).then((response) => {
       console.log(response.data);
-      this.user = response.data.user.name;
+      this.user = response.data.user;
       this.monster = response.data.monster;
     });
   },
