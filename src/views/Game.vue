@@ -6,8 +6,9 @@
     <p> {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
     <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
-    <div>
-    {{ lootMessage }}
+    <div style="margin-bottom: 50px;">
+    <h4>{{ lootFound }}</h4>
+    <p style="color: green; ">{{ lootDescription}}</p>
     </div>
     <p v-if="room.has_monster === true "> 
       You have encountered {{ monster.name }}<br>
@@ -25,9 +26,9 @@
     <p v-else-if="run === true"> </p>
     <!--  dynamic game message based off user attack/escape -->
       {{ gameMessage }}
-      <div id="userStats" v-for = "stat in user">
+      <!-- <div style ="border: 2px solid black;" id="userStats" v-for = "(statValue, stat) in user">
         
-        <p>{{ stat }}</p>
+        <p> {{ stat }}: {{ statValue}} </p> -->
        
       </div>
   </div>
@@ -53,8 +54,10 @@ export default {
       toggleMoveForward: true,
       run: false,
       hasEscaped: "",
-      lootMessage: "",
+      lootFound: "",
+      lootDescription: "",
       catchPhrase: "",
+      loot: "",
     };
   },
   created: function () {
@@ -80,11 +83,16 @@ export default {
         if (response.data.room.has_monster === true) {
           this.toggleMoveForward = !this.toggleMoveForward;
         }
+        // loot notes start here
         if (response.data.room.has_loot === true) {
-          this.lootMessage = "This room contains Loot";
+          this.lootFound = `This room contains a ${response.data.loot.name}`;
+          this.lootDescription = response.data.loot.description;
+          // this.loot = response.data.loot;
         } else {
-          this.lootMessage = "No loot here";
+          this.lootFound = "No loot here";
+          this.lootDescription = "";
         }
+        // loot notes end here
       });
     },
     userRun: function () {
