@@ -1,7 +1,7 @@
 
 
 <template>
-  <div class="home">
+  <div class="game">
     <h3>{{ message }} {{ user.name }} </h3>
     <p> {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
@@ -32,7 +32,7 @@
        
       </div>
   </div>
-</template>p
+</template>
 
 <style>
 </style>

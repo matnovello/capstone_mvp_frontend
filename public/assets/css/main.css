@@ -99,7 +99,11 @@ input, select, textarea {
 	}
 
 	body {
-		background-color: rgba(158, 113, 29, 0.897);
+		background-color: #935d8c;
+		background-image: url("images/overlay.png"), -moz-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+		background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+		background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+		background-image: url("images/overlay.png"), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -116,8 +120,8 @@ input, select, textarea {
 /* Type */
 
 	body {
-		background-color: black;
-		color: white
+		background-color: #935d8c;
+		color: rgba(255, 255, 255, 0.65);
 	}
 
 	body, input, select, textarea {
@@ -159,7 +163,7 @@ input, select, textarea {
 		text-decoration: none;
 		border-bottom: dotted 1px;
 		color: inherit;
-	}c
+	}
 
 		a:hover {
 			border-bottom-color: transparent;
@@ -315,7 +319,7 @@ input, select, textarea {
 	}
 
 	blockquote {
-		border-left-color: white;
+		border-left-color: rgba(255, 255, 255, 0.35);
 	}
 
 	code {
@@ -1817,7 +1821,7 @@ input, select, textarea {
 		}
 
 	.box {
-		border-color: white
+		border-color: rgba(255, 255, 255, 0.35);
 	}
 
 /* Button */
@@ -1954,7 +1958,7 @@ input, select, textarea {
 		button.primary,
 		.button.primary {
 			background-color: #8cc9f0;
-			color: black !important;
+			color: #ffffff !important;
 			box-shadow: none;
 		}
 
@@ -1979,7 +1983,7 @@ input, select, textarea {
 			input[type="button"].primary.icon:before,
 			button.primary.icon:before,
 			.button.primary.icon:before {
-				color: black !important;
+				color: #ffffff !important;
 			}
 
 /* Form */
@@ -3211,13 +3215,11 @@ input, select, textarea {
 		-webkit-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
 		-ms-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
 		transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
-		/* background-color: #ffffff; */
-		color: black
-		/* position: relative; */
-		width: 90%;
+		color: #636363;
+		position: relative;
+		width: 64em;
 		max-width: calc(100% - 4em);
 		padding: 1em;
-		/* background-color: non; */
 		border-top-left-radius: 0.25em;
 		border-top-right-radius: 0.25em;
 		cursor: default;
@@ -3290,11 +3292,11 @@ input, select, textarea {
 				}
 
 					#nav ul li a:hover {
-						color: white
+						background-color: rgba(222, 222, 222, 0.25);
 					}
 
 					#nav ul li a.active {
-						background-color: black
+						background-color: #ffffff;
 						box-shadow: none;
 					}
 

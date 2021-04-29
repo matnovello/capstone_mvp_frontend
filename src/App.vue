@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-  				Nav
 					<nav id="nav">
 						<ul>
 							<li><a href="Home" class="active">Home</a></li>
@@ -12,12 +11,12 @@
       <!-- could put user stats in here -->
 
     <router-view/>
-    					<footer id="footer">
+    					<!-- <footer id="footer">
 						<section>
 							<h2>this is the footer</h2>
 							<p>Ask me why I made this app: mvello66@gmail.com</p>
 						</section>
-              </footer>
+              </footer> -->
 
     
   </div>

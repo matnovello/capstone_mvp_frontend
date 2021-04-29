@@ -1,10 +1,9 @@
 
-
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
     
-    <p>hello</p>
+    
     <input type = text v-model="userName" placeholder="enter username">
     <button v-on:click="newGame">start new game</button> 
     {{ message }}
