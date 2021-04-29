@@ -26,7 +26,7 @@
     <p v-else-if="run === true"> </p>
     <!--  dynamic game message based off user attack/escape -->
       <div>
-      <p v-if="attacked === true">You dealt <span style = "color: red;"> {{attack_damage}} damage !</span></p>
+      <p v-if="attacked === true">You dealt <span style = "color: red;"> {{attack_damage}}</span> damage!</p>
       {{ deadMessage }}
 
       <!-- <div style ="border: 2px solid black;" id="userStats" v-for = "(statValue, stat) in user">
