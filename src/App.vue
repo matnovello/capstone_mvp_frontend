@@ -1,13 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/game">Game</router-link>
-    </div>
+  				Nav
+					<nav id="nav">
+						<ul>
+							<li><a href="Home" class="active">Home</a></li>
+							<li><a href="Game">Game</a></li>
+						</ul>
+					</nav>
+
+				<!-- Header -->
+      <!-- could put user stats in here -->
+
     <router-view/>
+    					<footer id="footer">
+						<section>
+							<h2>this is the footer</h2>
+							<p>Ask me why I made this app: mvello66@gmail.com</p>
+						</section>
+              </footer>
+
+    
   </div>
 
-  
+
 </template>
 
 <style>
@@ -16,11 +31,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
 }
 
 #nav {
   padding: 30px;
+  margin-bottom: 50px;
 }
 
 #nav a {

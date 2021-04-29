@@ -2,7 +2,7 @@
 
 <template>
   <div class="home">
-    <h1>{{ message }} {{ user.name }} </h1>
+    <h3>{{ message }} {{ user.name }} </h3>
     <p> {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
     <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
@@ -32,7 +32,7 @@
        
       </div>
   </div>
-</template>
+</template>p
 
 <style>
 </style>
@@ -73,7 +73,6 @@ export default {
         this.gameId = response.data.gameId;
         console.log(response.data.room.current_room);
         console.log(response.data);
-        this.message = "you move forward into the next room..";
         this.room = response.data.room;
         this.monster = response.data.monster;
         this.attacked = false;
