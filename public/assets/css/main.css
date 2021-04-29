@@ -99,11 +99,7 @@ input, select, textarea {
 	}
 
 	body {
-		background-color: #935d8c;
-		background-image: url("images/overlay.png"), -moz-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+		background-color: black;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -120,7 +116,7 @@ input, select, textarea {
 /* Type */
 
 	body {
-		background-color: #935d8c;
+		background-color: black
 		color: rgba(255, 255, 255, 0.65);
 	}
 
@@ -1821,7 +1817,7 @@ input, select, textarea {
 		}
 
 	.box {
-		border-color: rgba(255, 255, 255, 0.35);
+		border-color: black;
 	}
 
 /* Button */
@@ -1941,7 +1937,7 @@ input, select, textarea {
 		input[type="button"]:active,
 		button:active,
 		.button:active {
-			background-color: rgba(255, 255, 255, 0.2);
+			background-color: white
 		}
 
 		input[type="submit"].icon:before,
@@ -1958,7 +1954,6 @@ input, select, textarea {
 		button.primary,
 		.button.primary {
 			background-color: #8cc9f0;
-			color: #ffffff !important;
 			box-shadow: none;
 		}
 
@@ -1983,7 +1978,6 @@ input, select, textarea {
 			input[type="button"].primary.icon:before,
 			button.primary.icon:before,
 			.button.primary.icon:before {
-				color: #ffffff !important;
 			}
 
 /* Form */
@@ -3232,7 +3226,7 @@ input, select, textarea {
 		}
 
 		#nav a:hover {
-			color: #636363;
+			color: black
 		}
 
 		#nav strong, #nav b {
@@ -3296,7 +3290,7 @@ input, select, textarea {
 					}
 
 					#nav ul li a.active {
-						background-color: #ffffff;
+						background-color: none;
 						box-shadow: none;
 					}
 
@@ -3323,7 +3317,7 @@ input, select, textarea {
 
 	#main {
 		background-color: #ffffff;
-		color: #636363;
+		color: black
 		border-radius: 0.25em;
 	}
 
@@ -3400,7 +3394,6 @@ input, select, textarea {
 			#main button.primary,
 			#main .button.primary {
 				background-color: #8cc9f0;
-				color: #ffffff !important;
 				box-shadow: none;
 			}
 
@@ -3425,7 +3418,6 @@ input, select, textarea {
 				#main input[type="button"].primary.icon:before,
 				#main button.primary.icon:before,
 				#main .button.primary.icon:before {
-					color: #ffffff !important;
 				}
 
 		#main label {
