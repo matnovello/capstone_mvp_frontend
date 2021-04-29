@@ -2,7 +2,7 @@
   <div id="app">
 					<nav id="nav">
 						<ul>
-							<li><a href="Home" class="active">Home</a></li>
+							<li><a href="http://localhost:8080/" class="active">Home</a></li>
 							<li><a href="Game">Game</a></li>
 						</ul>
 					</nav>
@@ -20,7 +20,6 @@
 
     
   </div>
-
 
 </template>
 
