@@ -2144,6 +2144,7 @@ input, select, textarea {
 	textarea {
 		background-color: rgba(255, 255, 255, 0.075);
 		border-color: rgba(255, 255, 255, 0.35);
+		color: orange
 	}
 
 		input[type="text"]:focus,
@@ -3429,8 +3430,8 @@ input, select, textarea {
 		#main input[type="email"],
 		#main select,
 		#main textarea {
-			background-color: rgba(222, 222, 222, 0.25);
-			border-color: #dddddd;
+			background-color: black;
+			border-color: orange;
 		}
 
 			#main input[type="text"]:focus,

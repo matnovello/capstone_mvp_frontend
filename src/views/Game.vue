@@ -15,7 +15,7 @@
     <!-- monster conditionals -->
     <p v-if="room.has_monster === true "> 
       You have encountered <span style="color: orange;">{{ monster.name }}</span><br>
-      <img alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px;">
+      <img alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px; margin: 20px auto 20px auto">
       <br>
        <span style="color: pink">{{ monsterMessage }}</span>
        <br> 
