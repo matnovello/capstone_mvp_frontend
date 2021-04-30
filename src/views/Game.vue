@@ -16,11 +16,12 @@
     <p v-if="room.has_monster === true "> 
       You have encountered <span style="color: orange;">{{ monster.name }}</span><br>
       <img alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px; margin: 20px auto 20px auto">
+      <img v-else-if="monster.is_dead === true"
       <br>
        <span style="color: pink">{{ monsterMessage }}</span>
        <br> 
     </br>
-      <button v-on:click="userAttack">Attack</button>
+      <button v-on:click="battle">Attack</button>
       <button v-on:click="userRun">Run</button><br>
     </p>
     
@@ -29,7 +30,7 @@
     <p v-else-if="run === true"> </p>
     <!--  dynamic game message based off user attack/escape -->
       <div>
-      <p v-if="attacked === true">You dealt <span style = "color: red;"> {{attack_damage}}</span> damage</p>
+      <p v-if="attacked === true">You dealt <span style = "color: red;"> {{attack_damage}}</span> damage, and {{monster.name }} dealt <span style = "color: red;"> {{monster_attack_damage}}</span> damage </p>
 
 
       <!-- <div style ="border: 2px solid black;" id="userStats" v-for = "(statValue, stat) in user">
@@ -56,6 +57,7 @@ export default {
       room: "",
       attacked: false,
       attack_damage: "",
+      monster_attack_damage: "",
       toggleMoveForward: true,
       run: false,
       hasEscaped: "",
@@ -109,12 +111,14 @@ export default {
       // axios request that the user is running to back-end
       (this.run = true), (this.gameMessage = "you run away!");
     },
-    userAttack: function () {
+    battle: function () {
       // axios request that the user is attacking to back-end
       axios.patch(`http://localhost:3000/api/monsters/${this.monster.id}`).then((response) => {
         console.log(response.data.monster.is_dead);
         console.log(response.data);
         this.attack_damage = response.data.attack_damage;
+        this.monster_attack_damage = response.data.monster_attack_damage;
+        this.monster.attack_damage = response.data.monster_attack_damage;
         if (response.data.monster.is_dead === true) {
           this.toggleMoveForward = !this.toggleMoveForward;
           this.attacked = false;
