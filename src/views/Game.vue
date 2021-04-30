@@ -5,16 +5,19 @@
     <h3>{{ message }} {{ user.name }} </h3>
     <p> {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
+    <!-- moveForward notes -->
     <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
+    <!-- loot rendering  -->
     <div style="margin-bottom: 50px;" v-if = "toggleLoot === true">
     <h4 style="color: lawngreen"><i>{{ lootFound }}</i></h4>
     <p style="color: darkgreen; ">{{ lootDescription}}</p>
     </div>
+    <!-- monster conditionals -->
     <p v-if="room.has_monster === true "> 
       You have encountered <span style="color: orange;">{{ monster.name }}</span><br>
-      <img alt="Vue logo" src="../assets/skeleton_creep.gif" style="height:85px;">
+      <img alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px;">
       <br>
-       <span style="color: pink">{{ monster.catch_phrase}}</span>
+       <span style="color: pink">{{ monsterMessage }}</span>
        <br> 
     </br>
       <button v-on:click="userAttack">Attack</button>
@@ -27,7 +30,7 @@
     <!--  dynamic game message based off user attack/escape -->
       <div>
       <p v-if="attacked === true">You dealt <span style = "color: red;"> {{attack_damage}}</span> damage</p>
-      {{ deadMessage }}
+
 
       <!-- <div style ="border: 2px solid black;" id="userStats" v-for = "(statValue, stat) in user">
       
@@ -48,21 +51,17 @@ export default {
     return {
       message: "You awaken out of a deep slumber, ",
       gameId: localStorage.getItem("gameId"),
-      test: "",
       user: "",
       monster: "",
       room: "",
-      gameMessage: "",
       attacked: false,
       attack_damage: "",
-      deadMessage: "",
       toggleMoveForward: true,
       run: false,
       hasEscaped: "",
       lootFound: "",
       lootDescription: "",
       catchPhrase: "",
-      loot: "",
       monsterMessage: "",
       toggleLoot: false,
     };
@@ -84,10 +83,12 @@ export default {
         this.monster = response.data.monster;
         this.attacked = false;
         this.run = false;
-        this.gameMessage = "";
+        this.hasEscaped = response.data.has_escaped;
 
+        // monster conditionals
         if (response.data.room.has_monster === true) {
           this.toggleMoveForward = !this.toggleMoveForward;
+          this.monsterMessage = response.data.monster.catch_phrase;
         } else if (response.data.room.has_monster === false) {
           this.monsterMessage = "No monsters here";
         }
@@ -130,9 +131,10 @@ export default {
         if (response.data.has_escaped === true) {
           // toggle moveForward button
           this.toggleMoveForward = true;
-          this.gameMessage = `you have escaped!`;
+          this.monsterMessage = `you have escaped!`;
           //  when user escapes , hide the monster
           this.room.has_monster = false;
+          this.toggleLoot = false;
         }
       });
     },
