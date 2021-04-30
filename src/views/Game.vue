@@ -6,7 +6,7 @@
     <p> {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
     <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
-    <div style="margin-bottom: 50px;">
+    <div style="margin-bottom: 50px;" v-if = "toggleLoot === true">
     <h4 style="color: lawngreen"><i>{{ lootFound }}</i></h4>
     <p style="color: darkgreen; ">{{ lootDescription}}</p>
     </div>
@@ -64,6 +64,7 @@ export default {
       catchPhrase: "",
       loot: "",
       monsterMessage: "",
+      toggleLoot: false,
     };
   },
   created: function () {
@@ -117,6 +118,7 @@ export default {
           this.attacked = false;
           this.room.has_monster = false;
           this.monsterMessage = `You vanquished ${this.monster.name}`;
+          this.toggleLoot = true;
         }
       }),
         (this.attacked = true);
@@ -127,7 +129,7 @@ export default {
         console.log(response.data);
         if (response.data.has_escaped === true) {
           // toggle moveForward button
-          this.toggleMoveForward = !this.toggleMoveForward;
+          this.toggleMoveForward = true;
           this.gameMessage = `you have escaped!`;
           //  when user escapes , hide the monster
           this.room.has_monster = false;
