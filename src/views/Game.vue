@@ -84,6 +84,7 @@ export default {
         this.attacked = false;
         this.run = false;
         this.hasEscaped = response.data.has_escaped;
+        this.toggleLoot = false;
 
         // monster conditionals
         if (response.data.room.has_monster === true) {
