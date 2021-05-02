@@ -11,6 +11,7 @@
     <div style="margin-bottom: 50px;" v-if = "toggleLoot === true">
     <h4 style="color: lawngreen"><i>{{ lootFound }}</i></h4>
     <p style="color: darkgreen; ">{{ lootDescription}}</p>
+    <button v-on:click="addToInventory">Add To Inventory</button>
     </div>
     <!-- monster conditionals -->
     <p v-if="room.has_monster === true "> 
