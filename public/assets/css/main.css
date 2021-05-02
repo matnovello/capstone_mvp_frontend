@@ -37,6 +37,11 @@ footer, header, hgroup, menu, nav, section {
 	.story-button{
 		margin: 5px
 	}
+	#end-game{
+		color: cyan !important;
+
+
+	}
 
 	/* NEW IDS AND STYLES FOR MY APP END HERE  */
 

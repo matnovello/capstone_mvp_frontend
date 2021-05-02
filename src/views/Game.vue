@@ -2,21 +2,26 @@
 
 <template>
   <div class="game">
-    <h3> You awaken out of a deep slumber under an old creaky oak tree in a dense forest. You rememember that your name is <span style="color: lawngreen">{{ user.name }}</span>.. It is dark and the air feels cool. Up ahead, you hear the crunch of branches under footsteps getting closer and closer....</h3>
+    <h3 v-if="user.monsters_defeated < 5"> You awaken out of a deep slumber under an old creaky oak tree in a dense forest. You rememember that your name is <span style="color: lawngreen">{{ user.name }}</span>.. It is dark and the air feels cool. Up ahead, you hear the crunch of branches under footsteps getting closer and closer.... </h3>
+    <h3 v-else-if="user.monsters_defeated === 5">You have vanquished {{ user.monsters_defeated }} monsters too many. You grow weary from the metaphorically countless battles, the battles counted by user.monsters_defeated in your activeRecord model tsk tsk.... You lay down your invisible weapon that I never coded in and begin to sleep</h3>
     <p style="font-size: 11px;"> Room ID: {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
+    <div>
     <!-- moveForward notes -->
     <button id= "move-forward" v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
+    <button v-on:click="endGame" id= "end-game" v-if="toggleEndGame === true">Catch your breath and take a look around...</button>
     <!-- loot rendering  -->
     <div style="margin-bottom: 50px;" v-if = "toggleLoot === true">
     <h4 style="color: lawngreen"><i>{{ lootFound }}</i></h4>
-    <p style="color: darkgreen; ">{{ lootDescription}} {{loot.id }} </p>
+    <p style="color: darkgreen; ">{{ lootDescription}} </p>
 
-    <button v-on:click="addToInventory">Add To Inventory</button>
+    <button v-if="toggleInventoryMessage === false" v-on:click="addToInventory">Add To Inventory</button>
+  
+    <p style = "font-size: 12px;"v-else-if="toggleInventoryMessage === true ">Added the <span style="color: lawngreen;">{{ loot.name }}</span> to inventory!</p>
     </div>
     <!-- monster conditionals -->
     <p v-if="room.has_monster === true "> 
-      You have encountered <span style="color: rgb(224, 150, 255);">{{ monster.name }}</span><br>
+      You have encountered <span style="color: rgb(224, 150, 255);">{{ monster.name }} {{ user.monsters_defeated }} </span><br>
       <img   alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px; margin: 20px auto 20px auto">
       <img v-else-if="monster.is_dead === true"
       <br>
@@ -40,7 +45,25 @@
         <p> {{ stat }}: {{ statValue}} </p> -->
        
       </div>
+      </div>
   </div>
+
+      </template>
+      
+      <script>
+export default {};
+</script>
+      
+      <style>
+</style>
+      </template>
+      
+      <script>
+export default {};
+</script>
+      
+      <style>
+</style>
 </template>
 
 <style>
@@ -69,6 +92,9 @@ export default {
       monsterMessage: "",
       toggleLoot: false,
       loot: "",
+      toggleInventoryMessage: false,
+      is_boss: "",
+      toggleEndGame: true,
     };
   },
   created: function () {
@@ -90,6 +116,7 @@ export default {
         this.run = false;
         this.hasEscaped = response.data.has_escaped;
         this.toggleLoot = false;
+        this.toggleInventoryMessage = false;
 
         // monster conditionals
         if (response.data.room.has_monster === true) {
@@ -123,12 +150,25 @@ export default {
         this.attack_damage = response.data.attack_damage;
         this.monster_attack_damage = response.data.monster_attack_damage;
         this.monster.attack_damage = response.data.monster_attack_damage;
-        if (response.data.monster.is_dead === true) {
+
+        if (response.data.monster.is_boss === true && response.data.monster.is_dead === true) {
+          this.toggleMoveForward == false;
+          this.attacked = false;
+          this.room.has_monster = false;
+          this.monsterMessage = `You Have defeated the mighty and evil ${this.monster.name}`;
+          this.attacked = false;
+          this.toggeLoot = false;
+          // show end game button
+          this.toggleEndGame = true;
+        }
+        //
+        else if (response.data.monster.is_dead === true) {
           this.toggleMoveForward = !this.toggleMoveForward;
           this.attacked = false;
           this.room.has_monster = false;
           this.monsterMessage = `You vanquished ${this.monster.name}`;
           this.toggleLoot = true;
+          this.user.monsters_defeated = response.data.monsters_defeated;
         }
       }),
         (this.attacked = true);
@@ -144,7 +184,7 @@ export default {
           //  when user escapes , hide the monster
           this.room.has_monster = false;
           this.toggleLoot = false;
-        }
+        } else if (response.data.has_escaped === false) this.monsterMessage = "you cannot escape!";
       });
     },
     addToInventory: function () {
@@ -156,7 +196,11 @@ export default {
 
       axios.post("http://localhost:3000/api/user_loots", params).then((response) => {
         console.log(response.data);
+        this.toggleInventoryMessage = true;
       });
+    },
+    endGame: function () {
+      this.$router.push("/endGame");
     },
   },
 };
