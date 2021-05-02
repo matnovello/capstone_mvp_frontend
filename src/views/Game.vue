@@ -2,11 +2,11 @@
 
 <template>
   <div class="game">
-    <h3>{{ message }} {{ user.name }} </h3>
-    <p> {{ room.current_room }} </p>
+    <h3> You awaken out of a deep slumber under an old creaky oak tree in a dense forest. You rememember that your name is <span style="color: lawngreen">{{ user.name }}</span>.. It is dark and the air feels cool. Up ahead, you hear the crunch of branches under footsteps getting closer and closer....</h3>
+    <p style="font-size: 11px;"> Room ID: {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
     <!-- moveForward notes -->
-    <button v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
+    <button id= "move-forward" v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
     <!-- loot rendering  -->
     <div style="margin-bottom: 50px;" v-if = "toggleLoot === true">
     <h4 style="color: lawngreen"><i>{{ lootFound }}</i></h4>
@@ -14,15 +14,15 @@
     </div>
     <!-- monster conditionals -->
     <p v-if="room.has_monster === true "> 
-      You have encountered <span style="color: orange;">{{ monster.name }}</span><br>
-      <img alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px; margin: 20px auto 20px auto">
+      You have encountered <span style="color: rgb(224, 150, 255);">{{ monster.name }}</span><br>
+      <img   alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px; margin: 20px auto 20px auto">
       <img v-else-if="monster.is_dead === true"
       <br>
        <span style="color: pink">{{ monsterMessage }}</span>
        <br> 
     </br>
-      <button v-on:click="battle">Attack</button>
-      <button v-on:click="userRun">Run</button><br>
+      <button class = "story-button" v-on:click="battle">Attack</button>
+      <button class = "story-button" v-on:click="userRun">Run</button><br>
     </p>
     
     <p v-else-if="room.has_monster === false"> {{ monsterMessage }}.</p>
@@ -50,7 +50,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "You awaken out of a deep slumber, ",
+      introMessage: "",
       gameId: localStorage.getItem("gameId"),
       user: "",
       monster: "",

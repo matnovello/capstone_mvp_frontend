@@ -29,6 +29,18 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;}
 
+	/* NEW IDS AND STYLES FOR MY APP START HERE  */
+	#move-forward{
+		margin-bottom: 20px;
+		color: lawngreen !important;
+	}
+	.story-button{
+		margin: 5px
+	}
+
+	/* NEW IDS AND STYLES FOR MY APP END HERE  */
+
+
 body {
 	line-height: 1;
 }
@@ -2144,7 +2156,8 @@ input, select, textarea {
 	textarea {
 		background-color: rgba(255, 255, 255, 0.075);
 		border-color: rgba(255, 255, 255, 0.35);
-		color: orange
+		color: lawngreen;
+		margin-top: 20px;
 	}
 
 		input[type="text"]:focus,
@@ -3223,11 +3236,11 @@ input, select, textarea {
 	}
 
 		#nav input, #nav select, #nav textarea {
-			color: #636363;
+			color: lawngreen
 		}
 
 		#nav a:hover {
-			color: black
+			color: lawngreen
 		}
 
 		#nav strong, #nav b {
@@ -3235,7 +3248,7 @@ input, select, textarea {
 		}
 
 		#nav h1, #nav h2, #nav h3, #nav h4, #nav h5, #nav h6 {
-			color: #636363;
+			color: white
 		}
 
 		#nav blockquote {
@@ -3287,7 +3300,7 @@ input, select, textarea {
 				}
 
 					#nav ul li a:hover {
-						background-color: rgba(222, 222, 222, 0.25);
+						background-color: black
 					}
 
 					#nav ul li a.active {
@@ -3315,7 +3328,6 @@ input, select, textarea {
 
 
 /* Main */
-
 	#main {
 		background-color: #ffffff;
 		color: black

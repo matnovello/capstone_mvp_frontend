@@ -4,7 +4,8 @@
     <h1>{{ message }}</h1>
     
     
-    <input type=text v-model="userName" placeholder="enter username">
+    <input id="input-user-name"type=text v-model="userName" placeholder="enter username">
+    <br>
     <button v-on:click="newGame">start new game</button> 
     {{ message }}
   </div>
