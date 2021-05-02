@@ -10,7 +10,8 @@
     <!-- loot rendering  -->
     <div style="margin-bottom: 50px;" v-if = "toggleLoot === true">
     <h4 style="color: lawngreen"><i>{{ lootFound }}</i></h4>
-    <p style="color: darkgreen; ">{{ lootDescription}}</p>
+    <p style="color: darkgreen; ">{{ lootDescription}} {{loot.id }} </p>
+
     <button v-on:click="addToInventory">Add To Inventory</button>
     </div>
     <!-- monster conditionals -->
@@ -67,6 +68,7 @@ export default {
       catchPhrase: "",
       monsterMessage: "",
       toggleLoot: false,
+      loot: "",
     };
   },
   created: function () {
@@ -98,6 +100,7 @@ export default {
         }
         // loot notes start here
         if (response.data.room.has_loot === true) {
+          this.loot = response.data.loot;
           this.lootFound = `This room contains a ${response.data.loot.name}`;
           this.lootDescription = response.data.loot.description;
           // this.loot = response.data.loot;
@@ -142,6 +145,17 @@ export default {
           this.room.has_monster = false;
           this.toggleLoot = false;
         }
+      });
+    },
+    addToInventory: function () {
+      var params = {
+        user_id: this.user.id,
+        loot_id: this.loot.id,
+        quantity: 1,
+      };
+
+      axios.post("http://localhost:3000/api/user_loots", params).then((response) => {
+        console.log(response.data);
       });
     },
   },
