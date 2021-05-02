@@ -5,8 +5,8 @@
 <img src= "../assets/sock.jpeg" style="width: 50%;">
 
 <div id="hide-this" style="display:none">
- <audio autoplay="true" src="../assets/free_bird.mp3"></audio>
 </div>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FO3tpxxdzko?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </template>
 
