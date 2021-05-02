@@ -42,6 +42,9 @@ footer, header, hgroup, menu, nav, section {
 
 
 	}
+	#hide-this{
+		display: none;
+	}
 
 	/* NEW IDS AND STYLES FOR MY APP END HERE  */
 

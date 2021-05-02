@@ -1,13 +1,12 @@
 
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
-    
-    
-    <input id="input-user-name"type=text v-model="userName" placeholder="enter username">
-    <br>
-    <button v-on:click="newGame">start new game</button> 
-    {{ message }}
+ <p>From all that boss fighting your socks sure are sweaty!</p>
+<img src= "../assets/sock.jpeg" style="width: 50%;">
+
+<div id="hide-this" style="display:none">
+ <audio autoplay="true" src="../assets/free_bird.mp3"></audio>
+</div>
   </div>
 </template>
 
@@ -26,20 +25,7 @@ export default {
     };
   },
   created: function () {},
-  methods: {
-    newGame: function () {
-      var params = {
-        user_name: this.userName,
-      };
-      axios.post("http://localhost:3000/api/games", params).then((response) => {
-        console.log(response.data);
-        localStorage.setItem("gameId", response.data.game_id);
-        this.$router.push("/game");
-
-        console.log(localStorage.getItem("gameId"));
-      });
-    },
-  },
+  methods: {},
 };
 </script>
 

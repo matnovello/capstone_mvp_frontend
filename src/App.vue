@@ -4,7 +4,6 @@
 					<nav id="nav">
 						<ul>
 							<li><a href="http://localhost:8080" class="active">Home</a></li>
-							<li><a href="game">Current Game</a></li>
 
 						</ul>
 					</nav>
