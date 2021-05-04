@@ -3,7 +3,8 @@
   <div class="userLoot">
   <button v-on:click="backToGame" style="margin-bottom: 10px;"> Back To Game </button>
   <br>
- <div style = "border: 2px solid lightgrey;" v-for="loot in loots">
+ <div style = "border: 2px solid lightgrey; width: 50%; margin: auto;
+ padding: 10px;" v-for="loot in loots">
   Name: {{ loot.name }} 
   <br>
   Description:  {{ loot.description }}
