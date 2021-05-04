@@ -42,10 +42,10 @@ footer, header, hgroup, menu, nav, section {
 
 
 	}
-	#hide-this{
-		display: none;
+	#user-stats{
+		margin-top: 10px !important;
+		border: 2px solid purple;
 	}
-
 	/* NEW IDS AND STYLES FOR MY APP END HERE  */
 
 

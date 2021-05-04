@@ -1,10 +1,13 @@
 
 <template>
-  <div class="endGame">
- <p>From all that boss fighting your socks sure are sweaty!</p>
+  <div class="lostGame">
+ <p>It's alright, We didnt expect you to win anyways. This game is literally a dice roll</p>
 <img src= "../assets/sock.jpeg" style="width: 50%;">
 <br>
-<i>congratulations, you won </i>
+<i>congratulations, you lost </i>
+<br>
+<br>
+<button v-on:click="sendHome">Go Home and Cry</button>
   </div>
 </template>
 
@@ -12,8 +15,6 @@
 </style>
 
 <script>
-import axios from "axios";
-
 export default {
   data: function () {
     return {
@@ -23,7 +24,11 @@ export default {
     };
   },
   created: function () {},
-  methods: {},
+  methods: {
+    sendHome: function () {
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 

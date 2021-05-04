@@ -20,8 +20,9 @@
     <p style = "font-size: 12px;"v-else-if="toggleInventoryMessage === true ">Added the <span style="color: lawngreen;">{{ loot.name }}</span> to inventory!</p>
     </div>
     <!-- monster conditionals -->
-    <p v-if="room.has_monster === true "> 
-      You have encountered <span style="color: rgb(224, 150, 255);">{{ monster.name }} {{ user.monsters_defeated }} </span><br>
+    <div v-if="room.has_monster === true "> 
+      <p>You have encountered <span style="color: rgb(224, 150, 255);">{{ monster.name }} </span></p>
+      <br>
       <img   alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px; margin: 20px auto 20px auto">
       <img v-else-if="monster.is_dead === true"
       <br>
@@ -30,7 +31,7 @@
     </br>
       <button class = "story-button" v-on:click="battle">Attack</button>
       <button class = "story-button" v-on:click="userRun">Run</button><br>
-    </p>
+    </div>
     
     <p v-else-if="room.has_monster === false"> {{ monsterMessage }}.</p>
     <!-- <p v-if="attacked === true "> </p> -->
@@ -40,10 +41,10 @@
       <p v-if="attacked === true">You dealt <span style = "color: red;"> {{attack_damage}}</span> damage, and {{monster.name }} dealt <span style = "color: red;"> {{monster_attack_damage}}</span> damage </p>
 
 
-      <!-- <div style ="border: 2px solid black;" id="userStats" v-for = "(statValue, stat) in user">
-      
-        <p> {{ stat }}: {{ statValue}} </p> -->
-       
+       <div style ="border: 2px solid black;" id="user-stats">
+        <p> HP: {{userHealth}} , Attack Damage: {{ user.base_attack}}</p>  
+        <p> Monsters Defeated: {{ user.monsters_defeated }}</p>
+       </div>
       </div>
       </div>
   </div>
@@ -94,7 +95,8 @@ export default {
       loot: "",
       toggleInventoryMessage: false,
       is_boss: "",
-      toggleEndGame: true,
+      toggleEndGame: false,
+      userHealth: "",
     };
   },
   created: function () {
@@ -117,6 +119,7 @@ export default {
         this.hasEscaped = response.data.has_escaped;
         this.toggleLoot = false;
         this.toggleInventoryMessage = false;
+        this.userHealth = 50;
 
         // monster conditionals
         if (response.data.room.has_monster === true) {
@@ -150,6 +153,7 @@ export default {
         this.attack_damage = response.data.attack_damage;
         this.monster_attack_damage = response.data.monster_attack_damage;
         this.monster.attack_damage = response.data.monster_attack_damage;
+        this.userHealth = response.data.user_health;
 
         if (response.data.monster.is_boss === true && response.data.monster.is_dead === true) {
           this.toggleMoveForward == false;
@@ -169,6 +173,8 @@ export default {
           this.monsterMessage = `You vanquished ${this.monster.name}`;
           this.toggleLoot = true;
           this.user.monsters_defeated = response.data.monsters_defeated;
+        } else if (response.data.user_health <= 0) {
+          // this.$router.push("/youLost");
         }
       }),
         (this.attacked = true);
