@@ -42,7 +42,7 @@
 
 
        <div style ="border: 2px solid black;" id="user-stats">
-        <p> HP: {{userHealth}} , Attack Damage: {{ user.base_attack}}</p>  
+        <p> HP: {{user.base_health}} , Attack Damage: {{ user.base_attack}}</p>  
         <p> Monsters Defeated: {{ user.monsters_defeated }}</p>
        </div>
       </div>
@@ -103,6 +103,7 @@ export default {
     axios.get(`http://localhost:3000/api/games/${this.gameId}`).then((response) => {
       console.log(response.data);
       this.user = response.data.user;
+      // this.userHealth = response.data.user.base_health;
       this.monster = response.data.monster;
     });
   },
@@ -119,7 +120,7 @@ export default {
         this.hasEscaped = response.data.has_escaped;
         this.toggleLoot = false;
         this.toggleInventoryMessage = false;
-        this.userHealth = 50;
+        this.user.base_health = response.data.user.base_health;
 
         // monster conditionals
         if (response.data.room.has_monster === true) {
@@ -153,7 +154,7 @@ export default {
         this.attack_damage = response.data.attack_damage;
         this.monster_attack_damage = response.data.monster_attack_damage;
         this.monster.attack_damage = response.data.monster_attack_damage;
-        this.userHealth = response.data.user_health;
+        this.user = response.data.user;
 
         if (response.data.monster.is_boss === true && response.data.monster.is_dead === true) {
           this.toggleMoveForward == false;
