@@ -26,11 +26,13 @@
       <img   alt="Monster" src="../assets/skeleton_creep.gif" style="height:85px; margin: 20px auto 20px auto">
       <img v-else-if="monster.is_dead === true"
       <br>
-       <span style="color: pink">{{ monsterMessage }}</span>
+       <span style="color: pink">{{ monsterMessage }} </span>
+       <br>
+       <span style="color: lightblue"> Monster HP: {{ monster.base_health }}</span>
        <br> 
     </br>
       <button class = "story-button" v-on:click="battle">Attack</button>
-      <button class = "story-button" v-on:click="userRun">Run</button><br>
+      <button v-if="attacked === false" class = "story-button" v-on:click="userRun">Run</button><br>
     </div>
     
     <p v-else-if="room.has_monster === false"> {{ monsterMessage }}.</p>
@@ -41,8 +43,8 @@
       <p v-if="attacked === true">You dealt <span style = "color: red;"> {{attack_damage}}</span> damage, and {{monster.name }} dealt <span style = "color: red;"> {{monster_attack_damage}}</span> damage </p>
 
 
-       <div style ="border: 2px solid black;" id="user-stats">
-        <p> HP: {{user.base_health}} , Attack Damage: {{ user.base_attack}}</p>  
+       <div id="user-stats">
+        <p> HP: {{user.base_health}} , Base Damage: {{ user.base_attack}}</p>  
         <p> Monsters Defeated: {{ user.monsters_defeated }}</p>
        </div>
       </div>
@@ -127,7 +129,7 @@ export default {
           this.toggleMoveForward = !this.toggleMoveForward;
           this.monsterMessage = response.data.monster.catch_phrase;
         } else if (response.data.room.has_monster === false) {
-          this.monsterMessage = "No monsters here";
+          this.monsterMessage = "Must've been an illusion! There is nothing to see here... carry on weary soul";
         }
         // loot notes start here
         if (response.data.room.has_loot === true) {
@@ -135,9 +137,6 @@ export default {
           this.lootFound = `This room contains a ${response.data.loot.name}`;
           this.lootDescription = response.data.loot.description;
           // this.loot = response.data.loot;
-        } else {
-          this.lootFound = "No loot here";
-          this.lootDescription = "";
         }
         // loot notes end here
       });
@@ -153,8 +152,10 @@ export default {
         console.log(response.data);
         this.attack_damage = response.data.attack_damage;
         this.monster_attack_damage = response.data.monster_attack_damage;
+        this.monster.base_health = response.data.monster.base_health;
         this.monster.attack_damage = response.data.monster_attack_damage;
         this.user = response.data.user;
+        this.monsterMessage = response.data.monster.catch_phrase;
 
         if (response.data.monster.is_boss === true && response.data.monster.is_dead === true) {
           this.toggleMoveForward == false;
@@ -191,7 +192,9 @@ export default {
           //  when user escapes , hide the monster
           this.room.has_monster = false;
           this.toggleLoot = false;
-        } else if (response.data.has_escaped === false) this.monsterMessage = "you cannot escape!";
+        } else if (response.data.has_escaped === false) {
+          this.monsterMessage = "you cannot escape!";
+        }
       });
     },
     addToInventory: function () {
@@ -204,6 +207,8 @@ export default {
       axios.post("http://localhost:3000/api/user_loots", params).then((response) => {
         console.log(response.data);
         this.toggleInventoryMessage = true;
+        this.lootFound = "";
+        this.lootDescription = "";
       });
     },
     endGame: function () {

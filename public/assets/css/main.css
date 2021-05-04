@@ -44,7 +44,13 @@ footer, header, hgroup, menu, nav, section {
 	}
 	#user-stats{
 		margin-top: 10px !important;
-		border: 2px solid purple;
+		border: 2px solid lightgray;
+		border-radius: 8px;
+		padding: 25px 5px 10px 5px;
+		text-align: center;
+		width: 45%;
+		margin: auto;
+
 	}
 	/* NEW IDS AND STYLES FOR MY APP END HERE  */
 
