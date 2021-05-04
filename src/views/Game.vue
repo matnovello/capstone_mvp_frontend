@@ -2,7 +2,7 @@
 
 <template>
   <div class="game">
-    <h3 v-if="user.monsters_defeated < 5"> You awaken out of a deep slumber under an old creaky oak tree in a dense forest. You rememember that your name is <span style="color: lawngreen">{{ user.name }}</span>.. It is dark and the air feels cool. Up ahead, you hear the crunch of branches under footsteps getting closer and closer.... </h3>
+    <h3 v-if="user.monsters_defeated < 5"> You awaken out of a deep slumber under an old creaky oak tree in a dense forest. You remember that your name is <span style="color: lawngreen">{{ user.name }}</span>.. It is dark and the air feels cool. Up ahead, you hear the crunch of branches under footsteps getting closer and closer.... </h3>
     <h3 v-else-if="user.monsters_defeated === 5">You have vanquished {{ user.monsters_defeated }} monsters too many. You grow weary from the metaphorically countless battles, the battles counted by user.monsters_defeated in your activeRecord model tsk tsk.... You lay down your invisible weapon that I never coded in and begin to sleep</h3>
     <p style="font-size: 11px;"> Room ID: {{ room.current_room }} </p>
  <!-- if monster is in room hide... then, if monster is attacked , show -->
@@ -16,8 +16,8 @@
     <p style="color: darkgreen; ">{{ lootDescription}} </p>
 
     <button v-if="toggleInventoryMessage === false" v-on:click="addToInventory">Add To Inventory</button>
-  
-    <p style = "font-size: 12px;"v-else-if="toggleInventoryMessage === true ">Added the <span style="color: lawngreen;">{{ loot.name }}</span> to inventory!</p>
+  <!-- add to inventory -->
+    <p style = "font-size: 16px;"v-else-if="toggleInventoryMessage === true ">Added the <span style="color: lawngreen;">{{ loot.name }}</span> to inventory!</p>
     </div>
     <!-- monster conditionals -->
     <div v-if="room.has_monster === true "> 
@@ -46,6 +46,7 @@
        <div id="user-stats">
         <p> HP: {{user.base_health}} , Base Damage: {{ user.base_attack}}</p>  
         <p> Monsters Defeated: {{ user.monsters_defeated }}</p>
+        <button v-on:click="goToLoot">Check Out Your Cool Loot !</button>
        </div>
       </div>
       </div>
@@ -210,6 +211,9 @@ export default {
         this.lootFound = "";
         this.lootDescription = "";
       });
+    },
+    goToLoot: function () {
+      this.$router.push("/userLoot");
     },
     endGame: function () {
       this.$router.push("/endGame");

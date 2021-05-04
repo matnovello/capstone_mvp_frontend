@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Game from '../views/Game.vue'
 import endGame from "../views/endGame.vue"
 import lostGame from "../views/lostGame.vue"
+import userLoot from "../views/userLoot.vue"
+
 
 
 
@@ -31,6 +33,11 @@ const routes = [
     path: '/lostGame',
     name: 'lostGame',
     component: lostGame
+  },
+  {
+    path: '/userLoot',
+    name: 'userLoot',
+    component: userLoot
   },
   {
     path: '/about',
