@@ -9,7 +9,7 @@
     <div>
     <!-- moveForward notes -->
     <button id= "move-forward" v-if="toggleMoveForward === true" v-on:click="moveForward">Move Forward</button>
-    <button v-on:click="endGame" id= "end-game" v-if="toggleEndGame === true">Catch your breath and take a look around...</button>
+    <button style= "margin-top: 10px;" v-on:click="endGame" id= "end-game" v-if="toggleEndGame === true">Catch your breath and take a look around...</button>
     <!-- loot rendering  -->
     <div style="margin-bottom: 50px;" v-if = "toggleLoot === true">
     <h4 style="color: lawngreen"><i>{{ lootFound }}</i></h4>
