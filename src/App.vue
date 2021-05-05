@@ -13,11 +13,11 @@
 
     <router-view/>
     <hr>
-    					<footer id="footer">
-						<section>
-							<p>Ask me why I made this app: mvello66@gmail.com</p>
+    					<!-- <footer id="footer" >
+						<section style= "margin: auto; text-align: center;">
+							<p>Contact Me:  mvello66@gmail.com</p>
 						</section>
-              </footer>
+              </footer> -->
 
     
   </div>

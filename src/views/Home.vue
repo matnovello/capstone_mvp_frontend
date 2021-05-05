@@ -4,9 +4,9 @@
     <h1>{{ message }}</h1>
     
     
-    <input id="input-user-name"type=text v-model="userName" placeholder="enter username">
+    <input style="width: 50%; margin: auto;"id="input-user-name"type=text v-model="userName" placeholder="enter username">
     <br>
-    <button v-on:click="newGame">start new game</button> 
+    <button style="margin: auto;" v-on:click="newGame">start new game</button> 
     {{ message }}
   </div>
 </template>
